@@ -4,9 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"net"
-	"strconv"
 	"strings"
-	"time"
+	// see comments below about @timestamp
+	// "strconv"
+	// "time"
 
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
@@ -253,7 +254,11 @@ func (ll *LogListener) processErr(logData string, err error, tags []string) {
 }
 
 func (ll *LogListener) sendEvent(event common.MapStr) {
-	event["@timestamp"] = common.Time(time.Now())
+	/*
+		// todo: examine this if necessary, timestamp seems to need to be provided in beat.Event struct now (see protologbeat.go)
+			event["@timestamp"] = common.Time(time.Now())
+		2018-12-18T15:43:47.094-0700	WARN	elasticsearch/client.go:531	Cannot index event publisher.Event{Content:beat.Event{Timestamp:time.Time{wall:0x0, ext:0, loc:(*time.Location)(nil)}, Meta:common.MapStr(nil), Fields:common.MapStr{"@timestamp":common.Time{wall:0x36c6f0f2, ext:63680769825, loc:(*time.Location)(nil)}, ... "type":"protologbeat"}, Private:interface {}(nil)}, Flags:0x0} (status=400): {"type":"mapper_parsing_exception","reason":"failed to parse","caused_by":{"type":"json_parse_exception","reason":"Duplicate field '@timestamp'\n at [Source: org.elasticsearch.common.bytes.BytesReference$MarkSupportingStreamInputWrapper@2ed1a99c; line: 1, column: 54]"}}
+	*/
 	ll.logEntriesRecieved <- event
 }
 
@@ -266,7 +271,10 @@ func (ll *LogListener) processGelfMessage(msg *gelf.Message) {
 	event["short_message"] = msg.Short
 	event["full_message"] = msg.Full
 
+	// todo: examine this if necessary, timestamp seems to need to be provided in beat.Event struct now (see protologbeat.go)
+  //   see comment above in sendEvent
 	// 1 ms = 1000000 ns
+  /*
 	if msg.TimeUnix == 0 {
 		event["@timestamp"] = common.Time(time.Now())
 	} else {
@@ -279,6 +287,7 @@ func (ll *LogListener) processGelfMessage(msg *gelf.Message) {
 			event["@timestamp"] = common.Time(time.Unix(int64(msg.TimeUnix), int64(msf)*1000000))
 		}
 	}
+  */
 
 	event["level"] = msg.Level
 	event["facility"] = msg.Facility

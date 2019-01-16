@@ -5,7 +5,7 @@
 This application is intended as a replacement for [udplogbeat](https://github.com/hartfordfive/udplogbeat). Although quite similar, it does have some improvements and allows you to start up via either UDP or TCP. It can act accept plain-text or JSON logs and also act as a syslog destination replacement.
 
 Ensure that this folder is at the following location:
-`${GOPATH}/github.com/harfordfive`
+`${GOPATH}/github.com/channelgrabber`
 
 ## Getting Started with Protologbeat
 
@@ -43,7 +43,7 @@ JSON schemas can be automatically generated from an object here: http://jsonsche
 - If some potential loss of log events is acceptable for you, than this may be a reasonable solution for you.
 - This application is intended for scenarios where your application can log to protologbeat running on the same physical host.  It's discouraged to use this for cross-server/cross-region/cross-datacenter logging.
 - The current date/time is automatically added to each log entry once it is received by protologbeat.
-- Considering this could log data with any type of fields, it's suggested that you add your necessary field names and types to the [protologbeat.template-es2x.json](protologbeat.template-es2x.json) or [protologbeat.template.json](protologbeat.template.json) (*ES 5.x*) index templates.
+- Considering this could log data with any type of fields, it's suggested that you add your necessary field names and types to the [protologbeat.template.json](protologbeat.template.json) index template.
 
 ### Sample Clients
 
@@ -67,7 +67,7 @@ It will create a clean git history for each major step. Note that you can always
 To push Protologbeat in the git repository, run the following commands:
 
 ```
-git remote set-url origin https://github.com/harfordfive/protologbeat
+git remote set-url origin https://github.com/channelgrabber/protologbeat
 git push origin master
 ```
 
@@ -150,9 +150,9 @@ make clean
 To clone Protologbeat from the git repository, run the following commands:
 
 ```
-mkdir -p ${GOPATH}/github.com/harfordfive
-cd ${GOPATH}/github.com/harfordfive
-git clone https://github.com/harfordfive/protologbeat
+mkdir -p ${GOPATH}/github.com/channelgrabber
+cd ${GOPATH}/github.com/channelgrabber
+git clone https://github.com/channelgrabber/protologbeat
 ```
 
 
