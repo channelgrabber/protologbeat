@@ -1,7 +1,7 @@
 package cmd
 
 import (
-  "github.com/figure-of-late/protologbeat/beater"
+  "github.com/channelgrabber/protologbeat/beater"
 
   cmd "github.com/elastic/beats/libbeat/cmd"
 )
